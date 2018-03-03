@@ -26,5 +26,7 @@ Route.group(() => {
 Route.group(() => {
   Route.post('auth/login', 'Company/Auth/LoginController.login')
   Route.post('auth/register', 'Company/Auth/RegisterController.register')
+  Route.resource('achievements', 'Company/Achievement/AchievementController')
+    .apiOnly()
 })
   .prefix('api/v1/company')
