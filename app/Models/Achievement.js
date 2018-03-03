@@ -3,6 +3,15 @@
 const Model = use('Model')
 
 class Achievement extends Model {
+  static boot () {
+    super.boot()
+
+    this.addTrait('@provider:Lucid/Slugify', {
+      fields: { code: 'name' },
+      strategy: 'dbIncrement'
+    })
+  }
+
   achievementSteps () {
     return this.hasMany('App/Models/AchievementSteps')
   }
