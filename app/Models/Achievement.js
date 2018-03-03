@@ -13,7 +13,7 @@ class Achievement extends Model {
   }
 
   achievementSteps () {
-    return this.hasMany('App/Models/AchievementSteps')
+    return this.hasMany('App/Models/AchievementStep')
   }
 
   achievementType () {
