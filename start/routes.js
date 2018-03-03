@@ -16,3 +16,8 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+
+Route.group(() => {
+  Route.post('auth/login', 'Auth/LoginController.login')
+  Route.post('auth/register', 'Auth/RegisterController.register')
+}).prefix('api/v1')
