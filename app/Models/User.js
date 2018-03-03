@@ -12,6 +12,11 @@ class User extends Model {
   static get hidden () {
     return ['password']
   }
+
+  achievements () {
+    return this.belongsToMany('App/Models/Achievement')
+      .withPivot('step')
+  }
 }
 
 module.exports = User

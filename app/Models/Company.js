@@ -12,6 +12,10 @@ class Company extends Model {
   static get hidden () {
     return ['password']
   }
+
+  achievements () {
+    return this.hasMany('App/Models/Achievement')
+  }
 }
 
 module.exports = Company
