@@ -10,3 +10,10 @@ Factory.blueprint('App/Models/Company', async (faker) => {
   }
 })
 
+Factory.blueprint('App/Models/User', async (faker) => {
+  return {
+    email: faker.email(),
+    password: '87538753'
+  }
+})
+
