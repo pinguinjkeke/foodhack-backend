@@ -1,5 +1,7 @@
 'use strict'
 
+const { formatPhone } = require('../helpers')
+
 const Factory = use('Factory')
 
 Factory.blueprint('App/Models/Company', async (faker) => {
@@ -13,6 +15,7 @@ Factory.blueprint('App/Models/Company', async (faker) => {
 Factory.blueprint('App/Models/User', async (faker) => {
   return {
     email: faker.email(),
+    phone: formatPhone(faker.phone()),
     password: '87538753'
   }
 })
