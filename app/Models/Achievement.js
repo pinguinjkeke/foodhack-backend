@@ -26,6 +26,7 @@ class Achievement extends Model {
 
   users () {
     return this.belongsToMany('App/Models/User')
+      .withPivot('step')
   }
 }
 
