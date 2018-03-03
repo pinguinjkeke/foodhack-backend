@@ -12,7 +12,7 @@ class AchievementSchema extends Schema {
       table.text('description').nullable()
       table.string('image').nullable()
       table.text('reward').nullable()
-      table.integer('achievement.type').unsigned().references('id').inTable('achievement_types')
+      table.integer('achievement_type').unsigned().references('id').inTable('achievement_types')
       table.timestamps()
     })
 
@@ -24,6 +24,7 @@ class AchievementSchema extends Schema {
   }
 
   down () {
+    this.drop('achievement_user')
     this.drop('achievements')
   }
 }
