@@ -20,4 +20,11 @@ Route.on('/').render('welcome')
 Route.group(() => {
   Route.post('auth/login', 'User/Auth/LoginController.login')
   Route.post('auth/register', 'User/Auth/RegisterController.register')
-}).prefix('api/v1/user')
+})
+  .prefix('api/v1/user')
+
+Route.group(() => {
+  Route.post('auth/login', 'Company/Auth/LoginController.login')
+  Route.post('auth/register', 'Company/Auth/RegisterController.register')
+})
+  .prefix('api/v1/company')
