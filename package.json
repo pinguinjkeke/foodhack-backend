@@ -17,6 +17,7 @@
   "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.0",
+    "@adonisjs/ally": "^2.0.2",
     "@adonisjs/auth": "^3.0.1",
     "@adonisjs/bodyparser": "^2.0.2",
     "@adonisjs/cors": "^1.0.5",
@@ -27,6 +28,7 @@
     "@adonisjs/lucid-slugify": "^1.0.2",
     "@adonisjs/session": "^1.0.20",
     "@adonisjs/shield": "^1.0.6",
+    "@mikield/adonis-ally-extended": "^0.6.8",
     "sqlite3": "^3.1.13"
   },
   "devDependencies": {},
