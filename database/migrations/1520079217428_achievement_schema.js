@@ -7,6 +7,7 @@ class AchievementSchema extends Schema {
     this.create('achievements', (table) => {
       table.increments()
       table.integer('company_id').unsigned().references('id').inTable('companies')
+      table.boolean('hot').default(false)
       table.string('code')
       table.string('name')
       table.text('description').nullable()

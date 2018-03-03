@@ -22,16 +22,17 @@ Factory.blueprint('App/Models/User', async (faker) => {
 
 Factory.blueprint('App/Models/Achievement', async (faker) => {
   return {
-    name: faker.sentence(),
+    hot: faker.bool({ likelihood: 10 }),
+    name: faker.name(),
     description: faker.paragraph(),
     image: faker.url({ path: 'images', extensions: ['gif', 'jpeg', 'png'] }),
-    reward: faker.bool() ? faker.paragraph() : null
+    reward: faker.integer({ min: 1, max: 100 })
   }
 })
 
 Factory.blueprint('App/Models/AchievementStep', async (faker) => {
   return {
-    name: faker.sentence(),
+    name: faker.name(),
     description: faker.bool() ? faker.paragraph() : null
   }
 })
