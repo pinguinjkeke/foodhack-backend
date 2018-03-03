@@ -8,6 +8,10 @@ class User extends Model {
 
     this.addHook('beforeCreate', 'User.hashPassword')
   }
+
+  static get hidden () {
+    return ['password']
+  }
 }
 
 module.exports = User

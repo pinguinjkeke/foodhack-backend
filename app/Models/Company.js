@@ -8,6 +8,10 @@ class Company extends Model {
 
     this.addHook('beforeCreate', 'User.hashPassword')
   }
+
+  static get hidden () {
+    return ['password']
+  }
 }
 
 module.exports = Company
