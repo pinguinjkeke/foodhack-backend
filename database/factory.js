@@ -17,3 +17,11 @@ Factory.blueprint('App/Models/User', async (faker) => {
   }
 })
 
+Factory.blueprint('App/Models/Achievement', async (faker) => {
+  return {
+    name: faker.sentence(),
+    description: faker.paragraph(),
+    image: faker.url({ path: 'images', extensions: ['gif', 'jpeg', 'png'] }),
+    reward: faker.bool() ? faker.paragraph() : null
+  }
+})
