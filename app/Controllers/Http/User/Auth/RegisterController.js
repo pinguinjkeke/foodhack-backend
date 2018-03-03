@@ -12,7 +12,7 @@ class RegisterController {
 
     response.send({
       data: user,
-      token: (await auth.generate(user)).token
+      token: (await auth.authenticator('jwtUser').generate(user)).token
     })
   }
 }
