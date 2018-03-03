@@ -25,3 +25,10 @@ Factory.blueprint('App/Models/Achievement', async (faker) => {
     reward: faker.bool() ? faker.paragraph() : null
   }
 })
+
+Factory.blueprint('App/Models/AchievementStep', async (faker) => {
+  return {
+    name: faker.sentence(),
+    description: faker.bool() ? faker.paragraph() : null
+  }
+})
