@@ -7,6 +7,10 @@ const VkService = use('App/Vk/VkService')
 
 class VkController {
 
+  /*
+  request params:
+  achievement_id
+   */
   async CheckAchievement({request, auth}) {
 
     const achievementId = request.input('achievementId')
@@ -62,8 +66,7 @@ class VkController {
           {
             'achievement_id': achievementId,
             'user_id': userId,
-            'step': step.id,
-            'confirmed': true
+            'step': step.id
           }
         )
       }
