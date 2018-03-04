@@ -9,6 +9,7 @@ class UserSchema extends Schema {
       table.string('email', 254).unique().nullable()
       table.string('phone', 254).unique().nullable()
       table.string('password', 60)
+      table.string('vk_id', 50).nullable()
       table.timestamps()
     })
   }

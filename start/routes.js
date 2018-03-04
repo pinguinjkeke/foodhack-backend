@@ -41,6 +41,7 @@ Route.group(() => {
 // Logged in Company route group
 Route.group(() => {
   Route.resource('achievements', 'Company/Achievement/AchievementController').apiOnly()
+  Route.post('achievementSteps', 'Company/Achievement/AchievementController.storeStep')
 })
   .prefix('api/v1/company')
   .middleware(['auth:jwtCompany'])
@@ -51,5 +52,7 @@ Route.group(() => {
   Route.post('CheckMention', 'VkController.CheckMention')
   Route.get('Login', 'User/Auth/VkLoginController.login')
   Route.get('Register', 'User/Auth/VkRegisterController.register')
+  Route.post('Users', 'VkController.GetUsers')
+  Route.post('Achievements', 'VkController.GetAchievements')
 })
   .prefix('api/v1/vk')

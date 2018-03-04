@@ -19,6 +19,8 @@ class AchievementTypeSchema extends Schema {
       const rows = [
         { name: 'Лайк ВК', code: 'vk_like' },
         { name: 'Репост ВК', code: 'vk_repost' },
+        { name: 'Упоминание ВК', code: 'vk_mention' },
+        { name: 'Подписка ВК', code: 'vk_subscription' },
         { name: 'Другое', code: 'other' }
       ].map(row => ({ ...row, created_at: now, updated_at: now }))
 

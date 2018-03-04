@@ -24,6 +24,16 @@ class VkController {
       request.input('group_id')
     )
   }
+
+  // for testing purposes
+
+  async GetUsers({request}) {
+    return await VkService.GetUsers()
+  }
+
+  async GetAchievements({request}) {
+    return await VkService.GetAchievements()
+  }
 }
 
 module.exports = VkController

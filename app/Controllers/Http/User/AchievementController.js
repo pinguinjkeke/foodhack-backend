@@ -38,7 +38,15 @@ class AchievementController {
     const achievement = Achievement.query()
       .with('users', builder => builder.where('id', user.id).select('id'))
       .with('achievementType', builder => builder.select(['id', 'name', 'code']))
-      .with('achievementSteps', builder => builder.select(['id', 'name', 'description', 'achievement_id']))
+      .with('achievementSteps', builder => builder.select(
+        [
+          'id',
+          'name',
+          'description',
+          'achievement_id',
+          'vk_owner_id',
+          'vk_post_id'
+        ]))
       .fetch()
 
     return {
