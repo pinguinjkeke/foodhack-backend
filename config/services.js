@@ -7,7 +7,7 @@ module.exports = {
     vk: {
       clientId: Env.get('VK_CLIENT_ID'),
       clientSecret: Env.get('VK_CLIENT_SECRET'),
-      redirectUri: `${Env.get('APP_URL')}/authenticated/vk`
+      redirectUri: `${Env.get('APP_URL')}/api/v1/vk/authenticated`
     }
   }
 }
