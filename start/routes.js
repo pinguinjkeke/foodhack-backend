@@ -30,3 +30,11 @@ Route.group(() => {
     .apiOnly()
 })
   .prefix('api/v1/company')
+
+Route.group(() => {
+  Route.post('CheckRepost', 'VkController.CheckRepost')
+  Route.post('CheckSubscription', 'VkController.CheckSubscription')
+  Route.post('CheckMention', 'VkController.CheckMention')
+  Route.get('Login', 'User/Auth/VkLoginController.login')
+})
+  .prefix('api/v1/vk')
