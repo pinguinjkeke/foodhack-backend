@@ -9,6 +9,7 @@ class VkRegisterController {
     const user = new User()
     user.email = request.input('email')
     user.password = new Date().getTime().toString()
+    user.vk_id = request.input('user_id')
     await user.save()
 
     response.send({
