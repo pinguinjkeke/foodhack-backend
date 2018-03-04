@@ -16,10 +16,6 @@ class Achievement extends Model {
     return this.hasMany('App/Models/AchievementStep')
   }
 
-  achievementType () {
-    return this.belongsTo('App/Models/AchievementType')
-  }
-
   company () {
     return this.belongsTo('App/Models/Company')
   }

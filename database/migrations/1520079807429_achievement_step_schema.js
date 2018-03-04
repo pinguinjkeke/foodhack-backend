@@ -7,6 +7,7 @@ class AchievementStepSchema extends Schema {
     this.create('achievement_steps', (table) => {
       table.increments()
       table.integer('achievement_id').unsigned().references('id').inTable('achievements')
+      table.integer('achievement_type_id').unsigned().references('id').inTable('achievement_types')
       table.string('name')
       table.string('description').nullable()
       table.string('vk_owner_id').nullable()

@@ -7,7 +7,6 @@ class AchievementController {
     const user = await auth.getUser()
     const achievements = await Achievement.query()
       .with('users', builder => builder.where('id', user.id))
-      .with('achievementType', builder => builder.select(['id', 'name', 'code']))
       .withCount('achievementSteps')
       .fetch()
 
@@ -37,7 +36,6 @@ class AchievementController {
     const user = await auth.getUser()
     const achievement = Achievement.query()
       .with('users', builder => builder.where('id', user.id).select('id'))
-      .with('achievementType', builder => builder.select(['id', 'name', 'code']))
       .with('achievementSteps', builder => builder.select(
         [
           'id',
@@ -47,6 +45,7 @@ class AchievementController {
           'vk_owner_id',
           'vk_post_id'
         ]))
+      .with('achievementSteps.achievementType', builder => builder.select(['id', 'name', 'code']))
       .fetch()
 
     return {
