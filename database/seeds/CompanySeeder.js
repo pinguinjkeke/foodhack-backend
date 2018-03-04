@@ -19,16 +19,17 @@ class CompanySeeder {
   }
 
   async createCompanyAchievements (company) {
-    const achievements = await Factory.model('App/Models/Achievement').makeMany(chance.integer({ min: 5, max: 50 }))
+    const achievementsCount = chance.integer({ min: 5, max: 50 })
 
-    for (let i = 0; i < achievements.length; i++) {
+    for (let i = 0; i < achievementsCount; i++) {
+      const achievement = await Factory.model('App/Models/Achievement').make()
       const randomAchievementType = await AchievementType.query().orderByRaw('RANDOM()').first()
 
-      await achievements[i].achievementType().associate(randomAchievementType)
-      await achievements[i].company().associate(company)
-      await achievements[i].save()
+      await achievement.achievementType().associate(randomAchievementType)
+      await achievement.company().associate(company)
+      await achievement.save()
 
-      await this.createAchievementSteps(achievements[i])
+      await this.createAchievementSteps(achievement)
     }
   }
 
