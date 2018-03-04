@@ -1,6 +1,5 @@
 'use strict'
 
-const VkService = use('App/Vk/VkService')
 const Achievement = use('App/Models/Achievement')
 const AchievementStep = use('App/Models/AchievementStep')
 const VkService = use('App/Vk/VkService')
@@ -15,7 +14,7 @@ class VkController {
 
     const achievementId = request.input('achievementId')
     const achievement = Achievement.find(achievementId)
-    const steps = achievement.achievementSteps()
+    const steps = achievement.achievementSteps
 
     var achievementUnlocked = false
     var userId = auth.user.vk_id
@@ -60,17 +59,33 @@ class VkController {
         default:
           break;
       }
+    });
 
-      if (stepFinished) {
+    if (stepsFinished.length > 0) {
+
+      var achievementUser = await Database.table('achievement_user')
+        .whereHas('achievement_id', achievementId)
+        .whereHas('user_id', userId)
+
+      if (!achievementUser) {
         var insertRes = await Database.table('achievement_user').insert(
           {
             'achievement_id': achievementId,
             'user_id': userId,
-            'step': step.id
+            'step': stepsFinished.length
           }
         )
       }
-    });
+      else {
+        var insertRes = await Database.table('achievement_user').update(
+          {
+            'achievement_id': achievementId,
+            'user_id': userId,
+            'step': stepsFinished.length
+          }
+        )
+      }
+    }
 
     if (stepsFinished.length == steps.length) {
       achievementUnlocked = true

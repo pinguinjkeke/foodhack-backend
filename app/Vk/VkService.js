@@ -44,7 +44,7 @@ class VkService {
 
   /*
   user_id - id пользователя, который делает репост
-  owner_id - id группы, из которой нужно сделать репост (только числовое id)
+  owner_id - id группы, из которой нужно сделать репост числовое id или строка
   post_id - id поста в группе
    */
   static async CheckRepost(user_id, owner_id, post_id) {
