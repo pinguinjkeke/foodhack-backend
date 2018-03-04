@@ -8,7 +8,7 @@ const Database = use('Database')
 //const VK = require('vksdk');
 const vkapi = new (require('node-vkapi'))(
   {
-    accessToken: '94f1a7ff94f1a7ff94f1a7ff34949035ca994f194f1a7ffce6b155d76ac0134ef5e60f3',
+    accessToken: '741bcab2741bcab2741bcab270747a58877741b741bcab22e80b5cc176d4ce8b8bc9ec0',
     appSecret: 'YETwPOKfN2gVL0zQFmU6',
     appId: 6394421
   });
