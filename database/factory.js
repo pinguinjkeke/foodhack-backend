@@ -1,8 +1,11 @@
 'use strict'
 
+const request = require('http')
 const { formatPhone } = require('../helpers')
+const { downloadFile } = require('../app/helpers')
 
 const Factory = use('Factory')
+const Helpers = use('Helpers')
 
 Factory.blueprint('App/Models/Company', async (faker) => {
   return {
@@ -21,11 +24,16 @@ Factory.blueprint('App/Models/User', async (faker) => {
 })
 
 Factory.blueprint('App/Models/Achievement', async (faker) => {
+  const hot = faker.bool({ likelihood: 10 })
+  const imageUrl = `http://lorempixel.com/355/${hot ? 190 : 50}/`
+  const imagePath = `/images/achievement-${new Date().getTime()}.jpeg`
+  await downloadFile(imageUrl, Helpers.publicPath(imagePath))
+
   return {
-    hot: faker.bool({ likelihood: 10 }),
+    hot,
     name: faker.name(),
     description: faker.paragraph(),
-    image: faker.url({ path: 'images', extensions: ['gif', 'jpeg', 'png'] }),
+    image: imagePath,
     reward: faker.integer({ min: 1, max: 100 })
   }
 })
