@@ -10,6 +10,8 @@ class AchievementStepSchema extends Schema {
       table.integer('achievement_type_id').unsigned().references('id').inTable('achievement_types')
       table.string('name')
       table.string('description').nullable()
+      table.string('image').nullable()
+      table.string('animation').nullable()
       table.string('vk_owner_id').nullable()
       table.string('vk_post_id').nullable()
       table.timestamps()
