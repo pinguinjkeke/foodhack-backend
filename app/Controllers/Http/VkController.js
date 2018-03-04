@@ -16,8 +16,10 @@ class VkController {
     const achievement = Achievement.find(achievementId)
     const steps = achievement.achievementSteps
 
+    const user = await auth.getUser()
+
     var achievementUnlocked = false
-    var userId = auth.user.vk_id
+    var userId = user.vk_id
     var stepsFinished = []
 
     try {
