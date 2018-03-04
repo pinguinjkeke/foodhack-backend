@@ -57,5 +57,6 @@ Route.group(() => {
   Route.get('authenticated', 'User/Auth/VkAuthController.finish')
   Route.post('users', 'VkController.GetUsers')
   Route.post('achievements', 'VkController.GetAchievements')
+  Route.post('check-achievement', 'VkController.CheckAchievement')
 })
   .prefix('api/v1/vk')
