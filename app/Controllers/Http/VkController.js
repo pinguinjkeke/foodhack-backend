@@ -13,82 +13,87 @@ class VkController {
   async CheckAchievement({request, auth}) {
 
     const achievementId = request.input('achievementId')
-    const achievement = Achievement.find(achievementId)
+    const achievement = Achievement.findById(achievementId)
     const steps = achievement.achievementSteps
 
     var achievementUnlocked = false
     var userId = auth.user.vk_id
     var stepsFinished = []
+    
+    try {
+      steps.forEach(async step => {
 
-    steps.forEach(async step => {
+        const vk_owner_id = step.vk_owner_id
+        const vk_post_id = step.vk_post_id
 
-      const vk_owner_id = step.vk_owner_id
-      const vk_post_id = step.vk_post_id
+        var stepFinished = false;
 
-      var stepFinished = false;
+        switch (achievement.achievementType().code) {
+          case 'vk_repost':
 
-      switch (achievement.achievementType().code) {
-        case 'vk_repost':
+            var reposted = await VkService.CheckRepost(userId, vk_owner_id, vk_post_id)
+            if (reposted) {
+              stepsFinished.push(step.id)
+              stepFinished = true
+            }
 
-          var reposted = await VkService.CheckRepost(userId, vk_owner_id, vk_post_id)
-          if (reposted) {
-            stepsFinished.push(step.id)
-            stepFinished = true
-          }
+            break;
+          case 'vk_subscription':
 
-          break;
-        case 'vk_subscription':
+            var subscribed = await VkService.CheckSubscription(userId, vk_owner_id)
+            if (subscribed) {
+              stepsFinished.push(step.id)
+              stepFinished = true
+            }
 
-          var subscribed = await VkService.CheckSubscription(userId, vk_owner_id)
-          if (subscribed) {
-            stepsFinished.push(step.id)
-            stepFinished = true
-          }
+            break;
+          case 'vk_mention':
 
-          break;
-        case 'vk_mention':
+            var mentioned = await VkService.CheckMention(userId, vk_owner_id)
+            if (mentioned) {
+              stepsFinished.push(step.id)
+              stepFinished = true
+            }
 
-          var mentioned = await VkService.CheckMention(userId, vk_owner_id)
-          if (mentioned) {
-            stepsFinished.push(step.id)
-            stepFinished = true
-          }
+            break;
 
-          break;
+          default:
+            break;
+        }
+      });
 
-        default:
-          break;
+      if (stepsFinished.length > 0) {
+
+        var achievementUser = await Database.table('achievement_user')
+          .whereHas('achievement_id', achievementId)
+          .whereHas('user_id', userId)
+
+        if (!achievementUser) {
+          var res = await Database.table('achievement_user').insert(
+            {
+              'achievement_id': achievementId,
+              'user_id': userId,
+              'step': stepsFinished.length
+            }
+          )
+        }
+        else {
+          var res = await Database.table('achievement_user').update(
+            {
+              'achievement_id': achievementId,
+              'user_id': userId,
+              'step': stepsFinished.length
+            }
+          )
+        }
       }
-    });
 
-    if (stepsFinished.length > 0) {
-
-      var achievementUser = await Database.table('achievement_user')
-        .whereHas('achievement_id', achievementId)
-        .whereHas('user_id', userId)
-
-      if (!achievementUser) {
-        var insertRes = await Database.table('achievement_user').insert(
-          {
-            'achievement_id': achievementId,
-            'user_id': userId,
-            'step': stepsFinished.length
-          }
-        )
-      }
-      else {
-        var insertRes = await Database.table('achievement_user').update(
-          {
-            'achievement_id': achievementId,
-            'user_id': userId,
-            'step': stepsFinished.length
-          }
-        )
+      if (stepsFinished.length == steps.length) {
+        achievementUnlocked = true
       }
     }
-
-    if (stepsFinished.length == steps.length) {
-      achievementUnlocked = true
+    catch(error) {
+      console.log(error);
     }
 
     return achievementUnlocked
