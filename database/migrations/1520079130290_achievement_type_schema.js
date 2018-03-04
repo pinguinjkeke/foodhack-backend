@@ -17,6 +17,7 @@ class AchievementTypeSchema extends Schema {
     this.schedule(async (trx) => {
       const now = moment().format('YYYY-MM-DD HH:mm:ss')
       const rows = [
+        { name: 'Вход через ВК', code: 'vk_auth' },
         { name: 'Лайк ВК', code: 'vk_like' },
         { name: 'Репост ВК', code: 'vk_repost' },
         { name: 'Упоминание ВК', code: 'vk_mention' },

@@ -14,6 +14,7 @@ class AchievementStepSchema extends Schema {
       table.string('animation').nullable()
       table.string('vk_owner_id').nullable()
       table.string('vk_post_id').nullable()
+      table.string('reward').nullable()
       table.timestamps()
     })
   }

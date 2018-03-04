@@ -1,5 +1,7 @@
 'use strict'
 
+const moment = require('moment')
+
 const Database = use('Database')
 const Schema = use('Schema')
 
