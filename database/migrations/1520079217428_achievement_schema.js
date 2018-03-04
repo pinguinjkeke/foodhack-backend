@@ -12,6 +12,7 @@ class AchievementSchema extends Schema {
       table.string('name')
       table.text('description').nullable()
       table.string('image').nullable()
+      table.string('animation').nullable()
       table.text('reward').nullable()
       table.integer('achievement_type_id').unsigned().references('id').inTable('achievement_types')
       table.timestamps()
