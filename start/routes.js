@@ -50,5 +50,6 @@ Route.group(() => {
   Route.post('CheckSubscription', 'VkController.CheckSubscription')
   Route.post('CheckMention', 'VkController.CheckMention')
   Route.get('Login', 'User/Auth/VkLoginController.login')
+  Route.get('Register', 'User/Auth/VkRegisterController.register')
 })
   .prefix('api/v1/vk')
