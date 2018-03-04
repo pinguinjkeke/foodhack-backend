@@ -70,12 +70,12 @@ const achievementStepsData = [
   }
 ]
 const achievementsData = [
-  { name: 'Авторизуйся через ВК', image: '/images/tasks/1-small.jpg', reward: 10 },
-  { name: '50 ужинов от партии еды', image: '/images/tasks/2-small.jpg', reward: 300 },
-  { name: 'Пригласи друга', image: '/images/tasks/3-small.jpg', reward: 150 },
-  { name: 'Прими участие в матерклассе', image: '/images/tasks/4-small.jpg', reward: 90 },
-  { name: 'Собери свое меню', image: '/images/tasks/5-small.jpg', reward: 150 },
-  { name: 'Модифиатор к ужину', image: '/images/tasks/6-small.jpg', reward: 90 }
+  { name: 'Авторизуйся через ВК', image: '/images/tasks/1-small.png', reward: 10 },
+  { name: '50 ужинов от партии еды', image: '/images/tasks/2-small.png', reward: 300 },
+  { name: 'Пригласи друга', image: '/images/tasks/3-small.png', reward: 150 },
+  { name: 'Прими участие в матерклассе', image: '/images/tasks/4-small.png', reward: 90 },
+  { name: 'Собери свое меню', image: '/images/tasks/5-small.png', reward: 150 },
+  { name: 'Модифиатор к ужину', image: '/images/tasks/6-small.png', reward: 90 }
 ]
 
 class ProductionSeeder {
