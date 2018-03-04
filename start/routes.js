@@ -29,6 +29,7 @@ Route.group(() => {
   Route.get('achievements', 'User/AchievementController.index')
   Route.get('achievements/:id(\d+)', 'User/AchievementController.show')
   Route.get('achievements/latest', 'User/AchievementController.latest')
+  Route.get('points', 'User/PointController.index')
 })
   .prefix('api/v1/user')
   .middleware(['auth:jwtUser'])
