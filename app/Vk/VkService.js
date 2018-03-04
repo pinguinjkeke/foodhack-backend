@@ -17,53 +17,6 @@ const vkapi = new (require('node-vkapi'))(
 
 class VkService {
 
-
-  static async AchievementChecker() {
-
-      var counter = 0;
-      var i = setInterval(async function() {
-
-        var users = await User.query()
-        var achievements = Achievement.query()
-
-        achievements.forEach(async achievement => {
-
-          var achievementSteps = await AchievementStep.query()
-            .whereHas(
-              'achievement', (builder) => builder.where('id', achievement.id)
-            );
-
-            achievementSteps.forEach(async achievementStep => {
-
-              switch (achievement.achievementType().code) {
-                case 'vk_repost':
-
-
-                  break;
-                case 'vk_subscription':
-
-
-
-                  break;
-                case 'vk_mention':
-
-
-
-                  break;
-              }
-
-            });
-
-        });
-
-
-        counter++;
-        if(counter === 10) {
-          clearInterval(i);
-        }
-    }, 200);
-  }
-
   static async GetUsers() {
 
     return await User.query()
