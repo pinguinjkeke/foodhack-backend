@@ -1,5 +1,10 @@
 'use strict'
 
+const Achievement = use('App/Models/Achievement')
+const AchievementStep = use('App/Models/AchievementStep')
+const User = use('App/Models/User')
+const Database = use('Database')
+
 //const VK = require('vksdk');
 const vkapi = new (require('node-vkapi'))(
   {
@@ -11,6 +16,78 @@ const vkapi = new (require('node-vkapi'))(
 // CheckRepost(14603321, '-20629724', '1053923')
 
 class VkService {
+
+
+  static async AchievementChecker() {
+
+      var counter = 0;
+      var i = setInterval(async function() {
+
+        var users = await User.query()
+        var achievements = Achievement.query()
+
+        achievements.forEach(async achievement => {
+
+          var achievementSteps = await AchievementStep.query()
+            .whereHas(
+              'achievement', (builder) => builder.where('id', achievement.id)
+            );
+
+            achievementSteps.forEach(async achievementStep => {
+
+              switch (achievement.achievementType().code) {
+                case 'vk_repost':
+
+
+                  break;
+                case 'vk_subscription':
+
+
+
+                  break;
+                case 'vk_mention':
+
+
+
+                  break;
+              }
+
+            });
+
+        });
+
+
+        counter++;
+        if(counter === 10) {
+          clearInterval(i);
+        }
+    }, 200);
+  }
+
+  static async GetUsers() {
+
+    return await User.query()
+  }
+
+  static async GetAchievements() {
+
+    return await Achievement.query()
+      .with('achievementType', builder => builder.select(['id', 'name', 'code']))
+      .with('achievementSteps', builder => builder.select(
+        [
+          'id',
+          'name',
+          'description',
+          'achievement_id',
+          'vk_owner_id',
+          'vk_post_id'
+        ]));
+  }
+
+  static async GetAchievementSteps(achievementId) {
+
+
+  }
 
   /*
   user_id - id пользователя, который делает репост

@@ -16,6 +16,6 @@ class RegisterController {
       token: (await auth.authenticator('jwtCompany').generate(company)).token
     })
   }
-}
+}()
 
 module.exports = RegisterController

@@ -1,6 +1,7 @@
 'use strict'
 
 const Achievement = use('App/Models/Achievement')
+const AchievementStep = use('App/Models/AchievementStep')
 
 class AchievementController {
   async index ({ auth, request }) {
@@ -35,6 +36,28 @@ class AchievementController {
     await achievement.save()
 
     return achievement
+  }
+
+  /*
+  request:
+    achievement_id
+    name description vk_owner_id vk_post_id
+   */
+  async storeStep ({ auth, request }) {
+
+    const achievement = Achievement.find(request.input('achievement_id'))
+
+    const achievementStep = new AchievementStep()
+
+    achievementStep.name = request.input('name')
+    achievementStep.description = request.input('description')
+    achievementStep.vk_owner_id = request.input('vk_owner_id')
+    achievementStep.vk_post_id = request.input('vk_post_id')
+    achievementStep.achievement().associate(achievement.id)
+
+    await achievementStep.save()
+
+    return achievementStep
   }
 
   async update ({ params, auth, request, response }) {

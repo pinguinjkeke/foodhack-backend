@@ -27,6 +27,8 @@ Route.group(() => {
 // Logged in User route group
 Route.group(() => {
   Route.get('achievements', 'User/AchievementController.index')
+  Route.get('achievements/:id(\d+)', 'User/AchievementController.show')
+  Route.get('achievements/latest', 'User/AchievementController.latest')
 })
   .prefix('api/v1/user')
   .middleware(['auth:jwtUser'])
@@ -41,6 +43,7 @@ Route.group(() => {
 // Logged in Company route group
 Route.group(() => {
   Route.resource('achievements', 'Company/Achievement/AchievementController').apiOnly()
+  Route.post('achievementSteps', 'Company/Achievement/AchievementController.storeStep')
 })
   .prefix('api/v1/company')
   .middleware(['auth:jwtCompany'])
@@ -50,5 +53,8 @@ Route.group(() => {
   Route.post('CheckSubscription', 'VkController.CheckSubscription')
   Route.post('CheckMention', 'VkController.CheckMention')
   Route.get('Login', 'User/Auth/VkLoginController.login')
+  Route.get('Register', 'User/Auth/VkRegisterController.register')
+  Route.post('Users', 'VkController.GetUsers')
+  Route.post('Achievements', 'VkController.GetAchievements')
 })
   .prefix('api/v1/vk')

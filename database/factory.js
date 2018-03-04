@@ -19,7 +19,8 @@ Factory.blueprint('App/Models/User', async (faker) => {
   return {
     email: faker.email(),
     phone: formatPhone(faker.phone()),
-    password: '87538753'
+    password: '87538753',
+    vk_id: ''
   }
 })
 
@@ -41,6 +42,8 @@ Factory.blueprint('App/Models/Achievement', async (faker) => {
 Factory.blueprint('App/Models/AchievementStep', async (faker) => {
   return {
     name: faker.name(),
-    description: faker.bool() ? faker.paragraph() : null
+    description: faker.bool() ? faker.paragraph() : null,
+    vk_owner_id: "-20629724",
+    vk_post_id: "1053923"
   }
 })
