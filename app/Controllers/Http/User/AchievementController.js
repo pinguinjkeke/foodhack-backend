@@ -6,7 +6,7 @@ class AchievementController {
   async index ({ auth }) {
     const user = await auth.getUser()
     const achievements = await Achievement.query()
-      .with('users', builder => builder.where('id', user.id).select('id'))
+      .with('users', builder => builder.where('id', user.id))
       .with('achievementType', builder => builder.select(['id', 'name', 'code']))
       .withCount('achievementSteps')
       .fetch()
@@ -64,6 +64,7 @@ class AchievementController {
     await achievement.users().detach(user.id)
     await achievement.users().attach([user.id], (row) => {
       row.confirmed = true
+      row.step = achievement.pivot_step
     })
 
     return {
