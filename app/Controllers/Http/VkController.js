@@ -30,7 +30,7 @@ class VkController {
 
         var stepFinished = false;
 
-        switch (achievement.achievementType().code) {
+        switch (step.achievementType().code) {
           case 'vk_repost':
 
             var reposted = await VkService.CheckRepost(userId, vk_owner_id, vk_post_id)
