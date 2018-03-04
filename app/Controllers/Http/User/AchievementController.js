@@ -54,17 +54,31 @@ class AchievementController {
     }
   }
 
-  async latest ({ auth }) {
+  async latest ({ auth, response }) {
     const user = await auth.getUser()
 
-    const achievement = await user.achievements()
+    const achievements = await user.achievements()
       .wherePivot('confirmed', false)
-      .first()
+      .withCount('achievementSteps')
+      .fetch()
+
+    const achievement = achievements.rows.find(achievement => {
+      const json = achievement.toJSON()
+
+      return json.pivot.step === json.__meta__.achievementSteps_count
+    })
+
+    if (!achievement) {
+      response.status(204).send()
+
+      return
+    }
+
 
     await achievement.users().detach(user.id)
     await achievement.users().attach([user.id], (row) => {
       row.confirmed = true
-      row.step = achievement.pivot_step
+      row.step = achievement.toJSON().pivot.step
     })
 
     return {
