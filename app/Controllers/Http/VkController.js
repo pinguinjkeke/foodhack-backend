@@ -13,13 +13,13 @@ class VkController {
   async CheckAchievement({request, auth}) {
 
     const achievementId = request.input('achievementId')
-    const achievement = Achievement.findById(achievementId)
+    const achievement = Achievement.find(achievementId)
     const steps = achievement.achievementSteps
 
     var achievementUnlocked = false
     var userId = auth.user.vk_id
     var stepsFinished = []
-    
+
     try {
       steps.forEach(async step => {
 
