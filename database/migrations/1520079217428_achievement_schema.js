@@ -22,6 +22,7 @@ class AchievementSchema extends Schema {
       table.integer('achievement_id').unsigned().references('id').inTable('achievements')
       table.integer('user_id').unsigned().references('id').inTable('users')
       table.integer('step').nullable()
+      table.boolean('confirmed').default(false)
     })
   }
 

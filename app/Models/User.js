@@ -15,7 +15,7 @@ class User extends Model {
 
   achievements () {
     return this.belongsToMany('App/Models/Achievement')
-      .withPivot('step')
+      .withPivot(['step', 'confirmed'])
   }
 }
 
